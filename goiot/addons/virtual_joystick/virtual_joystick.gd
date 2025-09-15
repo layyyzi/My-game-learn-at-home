@@ -39,7 +39,7 @@ enum Visibility_mode {
 
 @export var action_left := "left"
 @export var action_right := "right"
-@export var action_up := "ui_up"
+@export var action_up := "run"
 @export var action_down := "block"
 
 # PUBLIC VARIABLES
@@ -135,10 +135,17 @@ func _update_joystick(touch_position: Vector2) -> void:
 	
 	if vector.length_squared() > deadzone_size * deadzone_size:
 		is_pressed = true
-		output = (vector - (vector.normalized() * deadzone_size)) / (clampzone_size - deadzone_size)
+		var raw_output = (vector - (vector.normalized() * deadzone_size)) / (clampzone_size - deadzone_size)
+		# Преобразуем в -1, 0 или 1
+		output = Vector2.ZERO
+		if abs(raw_output.x) >= 0.5:
+			output.x = sign(raw_output.x)
+		if abs(raw_output.y) >= 0.5:
+			output.y = sign(raw_output.y)
 	else:
 		is_pressed = false
 		output = Vector2.ZERO
+
 	
 	if use_input_actions:
 		# Release actions

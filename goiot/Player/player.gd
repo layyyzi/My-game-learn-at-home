@@ -23,23 +23,10 @@ var state = MOVE
 var run_speed = 1
 var combo = false
 var attack_cooldown = false
+var player_pos
 
 func _physics_process(delta: float) -> void:
-	match state:
-		MOVE:
-			move_state()
-		ATTACK:
-			attack_slide()
-		ATTACK2:
-			attack2_state()
-		ATTACK3:
-			attack3_state()
-		BLOCK:
-			block_state()
-		SLIDE:
-			slide_state()
-	
-	# Add the gravity.
+		# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
@@ -53,10 +40,28 @@ func _physics_process(delta: float) -> void:
 		queue_free()
 		get_tree().change_scene_to_file("res://menu.tscn")
 		
+	match state:
+		MOVE:
+			move_state()
+		ATTACK:
+			attack_slide()
+		ATTACK2:
+			attack2_state()
+		ATTACK3:
+			attack3_state()
+		BLOCK:
+			block_state()
+		SLIDE:
+			slide_state()
+		
 	move_and_slide()
+	
+	player_pos = self.position
+	Signals.emit_signal("player_position_update", player_pos)
+
 func move_state():
 	var direction := Input.get_axis("left", "right")
-	print(direction)
+	
 	if direction:
 		velocity.x = direction * SPEED * run_speed
 		if velocity.y == 0:
@@ -64,17 +69,16 @@ func move_state():
 				animPlayer.play("Walk")
 			else:
 				animPlayer.play("run")
-			
-				
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		if velocity.y == 0:
 			animPlayer.play("idle")
+			
 	if direction < 0:
 		$AnimatedSprite2D.flip_h = true
-		
 	elif direction > 0: 
 		anim.flip_h = false
+		
 	if Input.is_action_pressed("run"):
 		run_speed = 2
 	else:
