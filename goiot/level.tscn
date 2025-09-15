@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://c1m7itxceh5s0"]
+[gd_scene load_steps=21 format=4 uid="uid://c1m7itxceh5s0"]
 
 [ext_resource type="PackedScene" uid="uid://1o5vvrjug23m" path="res://Player/player.tscn" id="1_f2txt"]
 [ext_resource type="Script" uid="uid://cqngewo5nu0dv" path="res://level.gd" id="1_n6hdu"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cjo63w8o7a860" path="res://oak_woods_v1.0/background/background_layer_3.png" id="4_km5ld"]
 [ext_resource type="PackedScene" uid="uid://cnrtpexweaxm6" path="res://build/shop.tscn" id="5_1ainy"]
 [ext_resource type="Texture2D" uid="uid://cuyso6sraeo5g" path="res://oak_woods_v1.0/oak_woods_tileset.png" id="5_i2t4f"]
+[ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="8_i2t4f"]
 [ext_resource type="Texture2D" uid="uid://q7jlrcse272a" path="res://oak_woods_v1.0/circle.png" id="8_km5ld"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8cye3"]
@@ -436,7 +437,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_float) -> void:
 	text = \"HP: \" + str($\"../../Player/player\".health)
 "
 
@@ -458,13 +459,8 @@ func _process(_delta: float) -> void:
 script/source = "extends Label
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_float) -> void:
 		text = \"KILL: \" + str($\"../../Player/player\".kill)
 "
 
@@ -641,6 +637,8 @@ text = "DAY"
 libraries = {
 &"": SubResource("AnimationLibrary_2orkt")
 }
+
+[node name="Virtual Joystick" parent="CanvasLayer" instance=ExtResource("8_i2t4f")]
 
 [node name="Collectibles" type="Node2D" parent="."]
 script = SubResource("GDScript_km5ld")

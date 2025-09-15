@@ -56,6 +56,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 func move_state():
 	var direction := Input.get_axis("left", "right")
+	print(direction)
 	if direction:
 		velocity.x = direction * SPEED * run_speed
 		if velocity.y == 0:
@@ -69,10 +70,10 @@ func move_state():
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		if velocity.y == 0:
 			animPlayer.play("idle")
-	if direction == -1:
+	if direction < 0:
 		$AnimatedSprite2D.flip_h = true
 		
-	elif direction == 1: 
+	elif direction > 0: 
 		anim.flip_h = false
 	if Input.is_action_pressed("run"):
 		run_speed = 2
