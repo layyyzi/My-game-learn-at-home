@@ -23,7 +23,7 @@ var player
 var direction
 
 func _ready() -> void:
-	Signals.connect("player_position_update", Callable(self, "_on_player_posititon_update"))
+	Signals.connect("player_position_update", Callable(self, "_on_player_position_update"))
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -56,7 +56,7 @@ func chase_state():
 	direction = (player - self.position).normalized()
 	if direction.x<0:
 		sprite.flip_h=true
-		$AttackDirection.scale.x=Vector2(-1,1)
+		$AttackDirection.scale=Vector2(-1,1)
 	else:
 		sprite.flip_h=false
-		$AttackDirection.scale.x=Vector2(1,1)
+		$AttackDirection.scale=Vector2(1,1)

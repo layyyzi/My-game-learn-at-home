@@ -13,7 +13,8 @@ config_version=5
 config/name="Knight and skelets"
 run/main_scene="uid://clh753pr7o6lr"
 config/features=PackedStringArray("4.4", "Mobile")
-config/icon="res://icon.svg"
+config/icon="uid://dpum40oj4s7oi"
+config/windows_native_icon="res://blade of knight.ico"
 
 [autoload]
 
@@ -69,3 +70,4 @@ pointing/emulate_mouse_from_touch=false
 
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"
+textures/vram_compression/import_etc2_astc=true
