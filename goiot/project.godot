@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Knight and skelets"
 run/main_scene="uid://clh753pr7o6lr"
-config/features=PackedStringArray("4.4", "Mobile")
+config/features=PackedStringArray("4.5", "Mobile")
 config/icon="uid://dpum40oj4s7oi"
 config/windows_native_icon="res://blade of knight.ico"
 
